@@ -98,7 +98,15 @@ class Funcs():
         self.desconecta_bd()
         self.limpa_tela()
         self.select_lista()
-
+    def altera_cliente(self):
+        self.variaveis()
+        self.conecta_bd()
+        self.cursor.execute(""" UPDATE clientes SET nome_cliente = ?, telefone = ?, cidade = ?
+                         WHERE cod = ?""", (self.nome, self.telefone, self.cidade, self.codigo))
+        self.conn.commit()
+        self.desconecta_bd()
+        self.select_lista()
+        self.limpa_tela()
 class Aplication(Funcs):
     """Classe que contem as configurações do aplicativo"""
 
@@ -165,7 +173,7 @@ class Aplication(Funcs):
         self.bt_novo.place(relx=0.6, rely=0.1, relwidth=0.1, relheight=0.15)
 
         self.bt_alterar = Button(self.frame_1, text="Alterar", bd=2.5, bg="#107db2",fg= "white",
-                                font= ("verdana", 8, "bold"))
+                                font= ("verdana", 8, "bold"), command=self.altera_cliente)
         self.bt_alterar.place(relx=0.7, rely=0.1, relwidth=0.1, relheight=0.15)
 
         self.bt_apagar = Button(self.frame_1, text="Apagar", bd=2.5, bg="#107db2",fg= "white",
