@@ -1,4 +1,14 @@
-"""Importando biblioteca tkinte"""
+"""
+Este codigo faz parte do meu aprendizado em python, todo material aqui é reproduzido a partir
+Curso Python Tkinter - RfZorzi.
+Este curso esta disponivel no YouTube e segue o link abaixo.
+
+https://www.youtube.com/watch?v=RtrZcoVD1WM&list=PLqx8fDb-FZDFznZcXb_u_NyiQ7Nai674-&index=1
+
+IMPORTANTE: Este código não é de minha autoria e estou utilizando apenas como proposito de estudo e
+desenvolvimento pessoal.
+
+"""
 
 import sqlite3
 from tkinter import *
@@ -36,12 +46,11 @@ class Funcs():
         self.conn.commit()
         print("Banco de dados criado")
         self.desconecta_bd()
-    def variaveis(self):
+    def variaveis(self): #Pylint reclama que os "entrys" não são membros
         self.codigo = self.codigo_entry.get()
         self.nome = self.nome_entry.get()
         self.telefone = self.telefone_entry.get()
         self.cidade = self.cidade_entry.get()
-
     def add_clientes(self):
         """Adiciona os dados coletados ao banco de dados
         variáveis para armazenar os dados de entrada da tela
@@ -69,17 +78,19 @@ class Funcs():
             self.lista_cli.insert("", END, values=i)
         self.desconecta_bd()
     def on_double_clic(self, event):
-
+        """Preenche os dados ao dar duplo clique na Treeview"""
         self.limpa_tela()
-        self.lista_cli.selection()
+        self.lista_cli.selection() #Pylint reclama (no-member),
+                                   #pois são atributos da classe Aplication
 
         for n in self.lista_cli.selection():
             col1, col2, col3, col4 = self.lista_cli.item(n, 'values')
-            self.codigo_entry.insert(END, col1)
+            self.codigo_entry.insert(END, col1) 
             self.nome_entry.insert(END, col2)
             self.telefone_entry.insert(END, col3)
             self.cidade_entry.insert(END, col4)
     def deleta_cliente(self):
+        """Deleta do banco de dados a seleção preenchida"""
         self.variaveis()
         self.conecta_bd()
         self.cursor.execute(""" DELETE FROM clientes WHERE cod = ? """, (self.codigo))
