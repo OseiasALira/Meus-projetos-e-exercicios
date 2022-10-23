@@ -11,7 +11,7 @@ desenvolvimento pessoal.
 """
 
 import sqlite3
-from tkinter import *
+from tkinter import * 
 from tkinter import ttk
 
 root = Tk()  # cria tela
@@ -47,6 +47,7 @@ class Funcs():
         print("Banco de dados criado")
         self.desconecta_bd()
     def variaveis(self): #Pylint reclama que os "entrys" não são membros
+        """Aloca em variaveis os dados inseridos nos campos de entrada"""
         self.codigo = self.codigo_entry.get()
         self.nome = self.nome_entry.get()
         self.telefone = self.telefone_entry.get()
@@ -99,6 +100,7 @@ class Funcs():
         self.limpa_tela()
         self.select_lista()
     def altera_cliente(self):
+        """Atualiza um cadastro existente no banco de dados"""
         self.variaveis()
         self.conecta_bd()
         self.cursor.execute(""" UPDATE clientes SET nome_cliente = ?, telefone = ?, cidade = ?
