@@ -19,17 +19,24 @@ class Funcs():
         self.cursor.execute(""" CREATE TABLE IF NOT EXISTS students (
             id INTEGER PRIMARY KEY,
             name CHAR(50) NOT NULL,
-            answers_pt CHAR(20),
-            answers_mt CHAR(20)
+            current_year INTEGER NOT NULL,
+            status INTEGER
         );
         """)
-        self.conn.commit()
-        self.cursor.execute(""" CREATE TABLE IF NOT EXISTS exams (
+        self.cursor.execute(""" CREATE TABLE IF NOT EXISTS exams_answers (
             id INTEGER PRIMARY KEY,
             school CHAR(30) NOT NULL,
-            answers_pt CHAR(20) NOT NULL,
-            answers_mt CHAR(20) NOT NULL,
-            year INTEGER
+            portugues CHAR(20) NOT NULL,
+            matematica CHAR(20) NOT NULL,
+            current_year INTEGER
+        );
+        """)
+        self.cursor.execute(""" CREATE TABLE IF NOT EXISTS students_answers (
+            id INTEGER PRIMARY KEY,
+            student_id INTEGER NOT NULL,
+            exam_id INTEGER NOT NULL,
+            answer_port CHAR(20) NOT NULL,
+            answer_mate CHAR(20) NOT NULL
         );
         """)
         self.conn.commit()
