@@ -139,25 +139,25 @@ class Aplication(Funcs):
     def frames_da_tela(self):
         """Configurando o layout da janela"""
 
-        self.frame_1 = Frame(self.root,  # Instanciando uma caixa dentro da janela
-                             bd=4,  # Tamanho da borda
-                             bg='#dfe4ee',  # Cor do Background
+        self.frame_1 = Frame(self.root,                      # Instanciando uma caixa dentro da janela
+                             bd=4,                           # Tamanho da borda
+                             bg='#dfe4ee',                   # Cor do Background
                              highlightbackground='#759fe6',  # Cor da borda interna
-                             highlightthickness=3)  # Largura da borda interna
-        self.frame_1.place(relx=0.015,
-                           rely=0.025,
-                           relwidth=0.97,
-                           relheight=0.46)  # Posição relativa
+                             highlightthickness=3)           # Largura da borda interna
+        self.frame_1.place(relx=0.015,                       # Posição relativa
+                           rely=0.025,                       # Posição relativa
+                           relwidth=0.97,                    # Posição relativa
+                           relheight=0.46)                   # Posição relativa
 
-        self.frame_2 = Frame(self.root,  # Instanciando uma caixa dentro da janela
-                             bd=4,  # Tamanho da borda
-                             bg='#dfe4ee',  # Cor do Background
+        self.frame_2 = Frame(self.root,                      # Instanciando uma caixa dentro da janela
+                             bd=4,                           # Tamanho da borda
+                             bg='#dfe4ee',                   # Cor do Background
                              highlightbackground='#759fe6',  # Cor da borda interna
-                             highlightthickness=3)  # Largura da borda interna
-        self.frame_2.place(relx=0.015,
-                           rely=0.5,
-                           relwidth=0.97,
-                           relheight=0.46)  # Posição relativa
+                             highlightthickness=3)           # Largura da borda interna
+        self.frame_2.place(relx=0.015,                       # Posição relativa
+                           rely=0.5,                         # Posição relativa
+                           relwidth=0.97,                    # Posição relativa
+                           relheight=0.46)                   # Posição relativa
 
     def widgets_frame1(self):
         """Criando os botões do frame 1"""
