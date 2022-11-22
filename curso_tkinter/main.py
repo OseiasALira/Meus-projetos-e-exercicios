@@ -17,7 +17,7 @@ from tkinter import ttk
 root = Tk()  # cria tela
 
 class Funcs():
-    """Funções do aplicativo"""
+    """Funções de manipulação do banco de dados e gerenciamento de tela"""
     def limpa_tela(self):
         """Limpar dados da tela de cadastro"""
         self.codigo_entry.delete(0, END)

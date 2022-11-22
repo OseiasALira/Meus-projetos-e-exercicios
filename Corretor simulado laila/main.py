@@ -1,11 +1,15 @@
 """
-Funções do aplivativo
+    Funções do aplivativo
 
 """
 import sqlite3
 
 
 class Funcs():
+    """
+    Funções de manipulação do banco de dados
+    
+    """
 
     def __init__(self):
         
