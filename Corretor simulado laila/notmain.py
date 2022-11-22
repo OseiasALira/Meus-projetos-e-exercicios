@@ -1,25 +1,29 @@
 """
-Functions 
+Funções do aplivativo
 
 """
 import sqlite3
 
+
 class Funcs():
-    """ 
-    Funções do aplicativo
-    
-    """
+
+    def __init__(self):
+        
+        self.db_table()
+
     def db_connect(self):
         self.conn = sqlite3.connect("database.db")
         self.cursor = self.conn.cursor()
+
     def db_disconnect(self):
         self.conn.close()
+
     def db_table(self):
         self.db_connect()
         self.cursor.execute(""" CREATE TABLE IF NOT EXISTS students (
             id INTEGER PRIMARY KEY,
             name CHAR(50) NOT NULL,
-            current_year INTEGER NOT NULL,
+            class_year INTEGER NOT NULL,
             status INTEGER
         );
         """)
@@ -41,19 +45,31 @@ class Funcs():
         """)
         self.conn.commit()
         self.db_disconnect()
-    def add_student(self):
-        ...
+
+    def add_student(self, name, class_year, status=1):
+        _name = name
+        _class_year = class_year
+        _status = status
+        self.db_connect()
+        self.cursor.execute(""" INSERT INTO students (name, class_year, status)
+                            VALUES (?, ?, ?)""", (_name, _class_year, _status))
+        self.conn.commit()
+        self.db_disconnect()
+
     def delete_student(self):
         ...
+
     def update_student(self):
         ...
-    def add_quiz(self):
-        ...
-    def update_quiz(self):
-        ...
-    def delete_quiz(self):
+
+    def add_exam(self):
         ...
 
-teste =Funcs()
+    def update_exam(self):
+        ...
 
-teste.db_table()
+    def delete_exam(self):
+        ...
+
+
+Funcs()
