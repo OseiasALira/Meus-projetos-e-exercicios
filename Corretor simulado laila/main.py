@@ -8,21 +8,26 @@ import sqlite3
 class Funcs():
     """
     Funções de manipulação do banco de dados
-    
+
     """
 
     def __init__(self):
-        
+
+        self.db_connect()
         self.db_table()
 
     def db_connect(self):
+        """Connect database and create a cursor"""
+
         self.conn = sqlite3.connect("database.db")
         self.cursor = self.conn.cursor()
 
     def db_disconnect(self):
+        """Disconnect database"""
         self.conn.close()
 
     def db_table(self):
+        """Create tables in database if not exists"""
         self.db_connect()
         self.cursor.execute(""" CREATE TABLE IF NOT EXISTS students (
             id INTEGER PRIMARY KEY,
@@ -51,29 +56,72 @@ class Funcs():
         self.db_disconnect()
 
     def add_student(self, name, class_year, status=1):
+        """Create new students in database"""
         _name = name
         _class_year = class_year
         _status = status
         self.db_connect()
         self.cursor.execute(""" INSERT INTO students (name, class_year, status)
-                            VALUES (?, ?, ?)""", (_name, _class_year, _status))
+                            VALUES (?, ?, ?)""", (_name, _class_year, _status)
+        )
         self.conn.commit()
         self.db_disconnect()
 
-    def delete_student(self):
-        ...
+    def delete_student(self, id_student):
+        """Remove students from database"""
+        _id_student = id_student
+        self.db_connect()
+        self.conn.execute(""" DELETE FROM students WHERE id = ? """, _id_student)
+        self.conn.commit()
+        self.db_disconnect()
 
-    def update_student(self):
-        ...
+    def update_student(self, name, class_year, status, id_student):
+        """Update database students"""
+        _name = name
+        _class_year = class_year
+        _status = status
+        _id = id_student
+        self.db_connect()
+        self.cursor.execute(""" UPDATE students SET name = ?, class_year = ?, status = ?
+                            WHERE id = ?""", (_name, _class_year, _status, _id)
+        )
+        self.conn.commit()
+        self.db_disconnect()
 
-    def add_exam(self):
-        ...
+    def add_exam(self, school, portugues, matematica, current_year):
+        """Create new exam"""
+        _school = school
+        _portugues = portugues
+        _matematica = matematica
+        _current_year = current_year
+        self.db_connect()
+        self.conn.execute("""INSERT INTO exams_answers (school, portugues, matematica, current_year)
+                          VALUES (?, ?, ?, ?)""", (_school, _portugues, _matematica, _current_year)
+        )
+        self.conn.commit()
+        self.db_disconnect()
 
-    def update_exam(self):
-        ...
+    def update_exam(self, school, portugues, matematica, current_year, id_exam):
+        """Update exam"""
+        _school = school
+        _portugues = portugues
+        _matematica = matematica
+        _current_year = current_year
+        _id_exam = id_exam
+        self.db_connect()
+        self.conn.execute(""" UPDATE exams_answers SET school = ?, portugues = ?,
+                          matematica = ?, current_year = ? WHERE id = ?""",
+                          (_school, _portugues, _matematica, _current_year, _id_exam)
+        )
+        self.conn.commit()
+        self.db_disconnect()
 
-    def delete_exam(self):
-        ...
-
+    def delete_exam(self, id_exam):
+        """Remove exam"""
+        _id_exam = id_exam
+        self.db_connect()
+        self.conn.execute(""" DELETE FROM exams_answers WHERE id = ?""", _id_exam)
+        self.conn.commit()
+        self.db_disconnect()
 
 Funcs()
