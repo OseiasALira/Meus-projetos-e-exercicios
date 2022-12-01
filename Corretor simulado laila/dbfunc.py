@@ -5,7 +5,7 @@
 import sqlite3
 
 
-class Funcs():
+class DatabaseManager():
     """
     Funções de manipulação do banco de dados
 
@@ -124,4 +124,39 @@ class Funcs():
         self.conn.commit()
         self.db_disconnect()
 
-Funcs()
+    def students_answers(self, id_student, id_exam, answer_port, answer_mate):
+        """Add stundets answers in database"""
+
+        _id_student = id_student
+        _id_exam = id_exam
+        _answer_port = answer_port
+        _answer_mate = answer_mate
+
+        self.db_connect()
+        self.conn.execute(""" INSERT INTO students_answers (student_id, exam_id, answer_port,
+                          answer_mate) VALUES (?, ?, ?, ?)""",
+                          (_id_student, _id_exam, _answer_port, _answer_mate)
+
+        )
+        self.conn.commit()
+        self.db_disconnect()
+
+    def stundets_answers_update(self, id_student, id_exam, answer_port, answer_mate, id_students_answers):
+        """ update data answers """
+        _id_student = id_student
+        _id_exam = id_exam
+        _answer_port = answer_port
+        _answer_mate = answer_mate
+        _id_stundets_answers = id_students_answers
+
+        self.db_connect()
+        self.conn.execute(""" UPDATE students_answers SET student_id = ?, exam_id = ?
+                          answer_port = ?, answer_mate = ? WHERE id = ?""",
+                          (_id_student, _id_exam, _answer_port, _answer_mate, _id_stundets_answers)
+        )
+        self.conn.commit()
+        self.db_disconnect()
+
+if __name__ == '__main__':
+    DatabaseManager()
+    
